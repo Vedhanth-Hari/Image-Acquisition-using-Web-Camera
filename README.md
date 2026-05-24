@@ -27,101 +27,94 @@ End the program and close the output video window by pressing 'q'.
 ## Register No: 212224240181
 ## Program:
 ```
-i) Write the frame as JPG file
 import cv2
-
-viedoCaptureObject=cv2.VideoCapture(0)
-
-ret,frame=viedoCaptureObject.read()
-
-cv2.imwrite("webcam_img.jpg",frame)
-
-viedoCaptureObject.release()
-
-cv2.destroyAllWindows()
+import matplotlib.pyplot as plt
+from IPython.display import clear_output
+import time
 ```
 ```
-ii) Display the video
-import numpy as np
-
-import cv2
-
+cap = cv2.VideoCapture(0)
+ret, frame = cap.read()
+if ret:
+    cv2.imwrite("captured_frame.jpg", frame)
+cap.release()
+```
+```
+captured_image = cv2.imread('captured_frame.jpg')
+```
+```
+plt.imshow(captured_image[:,:,::-1])
+plt.title('Captured Frame')
+plt.axis('off')
+plt.show()
+```
+```
 cap = cv2.VideoCapture(0)
 
-ret, frame = cap.read()
-
-cv2.imshow('captured_frame', frame)
-
-cv2.waitKey(10000)
-
-
-cap.release()
-cv2.destroyAllWindows()
-```
-
-```
-iii) Display the video by resizing the window
-import numpy as np
-import cv2
-cap=cv2.VideoCapture(0)
-
-ret,frame=cap.read()
-width=int(cap.get(3))
-height=int(cap.get(4))
-image=np.zeros(frame.shape,np.uint8)
-smaller_frame=cv2.resize(frame,(0,0),fx=0.5,fy=0.5)
-image[:height//2, :width//2]=smaller_frame
-image[height//2:, :width//2]=smaller_frame
-image[:height//2, width//2:]=smaller_frame
-image[height//2:, width//2:]=smaller_frame
-
-cv2.imshow('212224240181_Vedhanth',image)
-
-cv2.waitKey(5000)  
-
-image_dict = {'captured_image1': image}
-cv2.imwrite('captured_image1.jpg', image)
+for i in range(50):
+    ret, frame = cap.read()
+    if not ret:
+        break
+    frame_rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+    clear_output(wait=True)
+    plt.imshow(frame_rgb)
+    plt.axis('off')
+    plt.show()
+    time.sleep(0.05)
 
 cap.release()
-cv2.destroyAllWindows()
 ```
-
 ```
-iv) Rotate and display the video
-import numpy as np
-import cv2
-cap=cv2.VideoCapture(0)
+cap = cv2.VideoCapture(0)
 
-ret,frame=cap.read()
-width=int(cap.get(3))
-height=int(cap.get(4))
-image=np.zeros(frame.shape,np.uint8)
-smaller_frame=cv2.resize(frame,(0,0),fx=0.5,fy=0.5)
-image[:height//2, :width//2]=cv2.rotate(smaller_frame,cv2.ROTATE_180)
-image[height//2:, :width//2]=smaller_frame
-image[:height//2, width//2:]=cv2.rotate(smaller_frame,cv2.ROTATE_180)
-image[height//2:, width//2:]=smaller_frame
-
-cv2.imshow('212224240181',image)
-
-cv2.waitKey(5000) 
-
-image_dict = {'captured_image2': image}
-cv2.imwrite('captured_image2.jpg', image)
+for i in range(50):
+    ret, frame = cap.read()
+    if not ret:
+        break
+    resized_frame = cv2.resize(frame, (100, 150))  # Resize to 320x240
+    frame_rgb = cv2.cvtColor(resized_frame, cv2.COLOR_BGR2RGB)
+    clear_output(wait=True)
+    plt.imshow(frame_rgb)
+    plt.axis('off')
+    plt.show()
+    time.sleep(0.05)
 
 cap.release()
-cv2.destroyAllWindows()
 ```
+```
+cap = cv2.VideoCapture(0)
+
+for i in range(50):
+    ret, frame = cap.read()
+    if not ret:
+        break
+    rotated_frame = cv2.rotate(frame, cv2.ROTATE_90_CLOCKWISE)
+    frame_rgb = cv2.cvtColor(rotated_frame, cv2.COLOR_BGR2RGB)
+    clear_output(wait=True)
+    plt.imshow(frame_rgb)
+    plt.axis('off')
+    plt.show()
+    time.sleep(0.05)
+
+cap.release()
+```
+
 ## Output:
 ### i) Write the frame as JPG image
-<img width="792" height="634" alt="Screenshot 2026-05-21 120451" src="https://github.com/user-attachments/assets/b3ab5644-0452-4576-826e-7766881ab1a5" />
+<img width="661" height="509" alt="image" src="https://github.com/user-attachments/assets/9338b13f-33c3-41dc-9e63-011ebc916344" />
 
-### iii) Display the video by resizing the window
-<img width="459" height="371" alt="image" src="https://github.com/user-attachments/assets/be1f9546-a684-4a54-ad8a-a75de08c6096" />
+
+### ii) Display the video by resizing the window
+
+<img width="638" height="484" alt="image" src="https://github.com/user-attachments/assets/5911b20d-e5dc-493c-853a-ec93b90cb8b3" />
+
+### iii)
+<img width="341" height="499" alt="image" src="https://github.com/user-attachments/assets/f9f221b6-616f-4aab-b0d9-432eaf9b3444" />
 
 
 #### iv) Rotate and display the video
-<img width="462" height="370" alt="image" src="https://github.com/user-attachments/assets/679467e8-e6a8-4611-a7d8-f5686d116a69" />
+
+<img width="381" height="493" alt="image" src="https://github.com/user-attachments/assets/b58ec273-9ca5-4e13-a744-49db887f693d" />
 
 
 ## Result:
